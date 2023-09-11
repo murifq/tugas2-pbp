@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+            background-color: green;
+            max-width: 100%;
+
+        }
+        h1, h2{
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+        .product-box{
+            display: flex;
+            border-radius: 10px;
+            flex-direction: column;
+            border-style: double;
+            max-width:120px ;
+        }
+        .product-box p{
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+        .price-field{
+            font-weight: bold;
+        }
+
+        a{
+            color: inherit;
+        }
+        img{
+            max-width: 500px;
+        }
+
+        .review-container{
+            display: flex;
+            flex-direction: row;
+        }
+        .items-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            flex-wrap: wrap;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>tokopakedi</h1>
+        <h2>Just Do It Lah!</h2>
+    </header>
+    <div class="items-container">
+        {%for x in items%}
+        <ul>
+            <a href="">
+                <div class="product-box">
+                    <img src='{{x.photo_url}}' alt="">
+                    <p>{{x.name}}</p>
+                    <p class="price-field">Rp.{{x.price}}</p>
+                    <div class="review-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
+                        <p>{{x.rating}} | </p>
+                        <p>{{x.sold}} terjual</p>
+                    </div>
+                </div>
+            </a>
+        </ul>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
