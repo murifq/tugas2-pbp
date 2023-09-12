@@ -150,4 +150,4 @@ MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahk
 
 * Model: Mengatur segala hal yang berkaitan dengan data
 * View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
-*c.* View model: Berinteraksi dengan model lalu datanya diterukan ke view.
+* View model: Berinteraksi dengan model lalu datanya diterukan ke view.
