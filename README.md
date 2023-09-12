@@ -44,9 +44,9 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
         7. Melakukan migrasi model dengan menjalankan ```python manage.py makemigrations``` lalu ```python manage.py migrate```
         8.
 
-#Implementasi Setiap Checklist yang Ada
+# Implementasi Setiap Checklist yang Ada
 
-##Membuat sebuah proyek Django baru.
+## Membuat sebuah proyek Django baru.
 1. Membuat folder baru
 2. Membuat _virtual environment_ dengan menjalankan ```python -m venv env```
 3. Masuk ke dalam virtual environment dengan menjalankan ```env\Scripts\activate.bat```
@@ -64,7 +64,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
     django-admin startproject tokopakedi .
     ```
 
-##Membuat aplikasi dengan nama main pada proyek tersebut
+## Membuat aplikasi dengan nama main pada proyek tersebut
 1. Membuat aplikasi `main` baru dengan menjalankan 
     ```
     python manage.py startapp main
@@ -77,7 +77,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
         ...
         ]
     ```
-##Melakukan routing pada proyek agar dapat menjalankan aplikasi main.
+## Melakukan routing pada proyek agar dapat menjalankan aplikasi main.
 1. Buka `urls.py` dalam direktori `tokopakedi` lalu tambahkan
     ```
     urlpatterns = [
@@ -87,7 +87,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
     ```
     url patterns admin digunakan agar bisa membuka admin site django. Sedangkan `main.urls` berguna agar aplikasi `main` dapat diakses
 
-##Membuat model pada aplikasi main dengan nama Item
+## Membuat model pada aplikasi main dengan nama Item
 1. Buka `models.py` lalu tambahkan 
     ```
     class Item(models.Model):
@@ -108,7 +108,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
     python manage.py makemigrations
     ```
 
-##Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
+## Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
 1. Buka `views.py` pada direktori `main` lalu tambahkan fungsi berikut
     ```
     def show_main (request):
@@ -132,7 +132,7 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
 2. Tambahkan direktori `templates` di dalam direktori `main`. Direktori `templates` berguna untuk menyimpan template-template html file yang akan dipanggi jika diperlukan
 3. Membuat `main.html` dan `home.html` sesuai dengan ketentuan. Hias sedikit dengan menggunakan css style
 
-##Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.
+## Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.
 1. Buat `urls.py` pada direktori main lalu tambahkan
     ```
     from django.urls import path
@@ -148,22 +148,22 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
     http://127.0.0.1:8000/: memamnggil fungsi show_main pada views, lalu menampilkan `main.html`
     http://127.0.0.1:8000/home: memamnggil fungsi show_home pada views, lalu menampilkan `home.html`
 
-##Melakukan deployment ke Adaptable
+## Melakukan deployment ke Adaptable
 1. Simpan kode yang telah dibuat lalu diunggah ke github repository
 2. Hubungkan Adaptable dengan github repository
 
 #Bagan yang berisi request client ke web aplikasi berbasis Django
 
 
-#Mengapa menggunakan _virtual environment_?
+# Mengapa menggunakan _virtual environment_?
 _Virtual environment_ digunakan untuk menjaga _dependencies_ yang dibutuhkan dari setiap proyek yang ada. Sebagai contoh jika kita mengerjakan banyak proyek django, maka kita bisa membedakan dan menjaga _dependencies_ dari setiap proyek yang ada. Bisa saja setiap proyek memiliki versi dan _dependencies_ yang berbeda-beda.
 
 #Apakah bisa membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment_?
 Ya, tetap bisa. Namun tidak disarankan melakukan seperti itu. Hal tersebut akan sangat menyulitkan apabila misalkan, saat ini kita membuat proyek a. Lalu pada 3 tahun lagi, kita ingin mengubah proyek a kembali. Namun, sudah ada banyak pembaruan versi dari _dependencies_ yang kita gunakan. Sehingga bisa saja _packages_ yang kita miliki saat ini tidak sesuai dengan versi Django proyek 3 tahun yang lalu.
 
-#Apakah itu MVC, MVT, MVVM dan perbedaannya?
+# Apakah itu MVC, MVT, MVVM dan perbedaannya?
 
-##MVC (Model, View, Controller)
+## MVC (Model, View, Controller)
 ![Alt text](image.png)
 (https://www.dicoding.com/blog/apa-itu-mvc-pahami-konsepnya/)
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
@@ -171,7 +171,7 @@ a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
 b. View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna dalam bentuk GUI. Sebagai contoh berkaitan dengan html dan css
 c. Controller: Sebgai jembatan antara model dan view
 
-##MVT (Model, View, Template)
+## MVT (Model, View, Template)
 ![Alt text](image-2.png)
 (https://www.geeksforgeeks.org/django-project-mvt-structure/)
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
@@ -179,7 +179,7 @@ a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
 b. View: Sebagai jembatan antara model dan template.
 c. Template: Mengatur segala hal yang berkaitan dengan apa yang akan ditamplkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
 
-##MVVM (Model, View, View Model)
+## MVVM (Model, View, View Model)
 ![Alt text](image-1.png)
 (https://www.dicoding.com/blog/tips-design-pattern-mvvm/)
 a. Model: Mengatur segala hal yang berkaitan dengan data
