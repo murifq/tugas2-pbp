@@ -1,49 +1,5 @@
 link aplikasi adaptable: https://tokopakedi-tugas2.adaptable.app
 
-A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
-    #GitHub Setting:
-        1. Membuat repository GitHub dengan nama "tugas2-pbp".
-        2. Membuat folder direktori lokal.
-        3. Melakukan "git init"
-        4. Melakukan konfigurasi username dan email
-        5. Melakukan "git branch -M main"
-        6. Melakukan "git remote add origin <Link_Repo>
-        7. Menambahkan file .gitignore (berisi apa saja yang akan diabaikan Git) dan requiremnts.txt (berisi apa saja yang akan diinstall)
-    
-    #Membuat Virtual environment:
-        1. Jalankan "python -m venv env"
-        2. Jalnakan "env\Scripts\activate.bat"
-
-    #Membuat Django:
-        1. Lakukan "pip install -r requirements.txt"
-        2. Membuat proyek Django yang baru dengan melakukan ```django-admin startproject tokopakedi .```
-        3. Buka settings.py lalu tambahkan : 
-        ```ALLOWED_HOSTS = ["*"]```
-        Hal tersebut dilakukan agar bisa diakses oleh semua host.
-        4. Buat aplikasi main baru dengan menjalankan ```python manage.py startapp main```
-        5. Buka settings lalu tambahkan aplikasi main dengan cara berikut: 
-        ```
-        INSTALLED_APPS = [
-            ...,
-            'main',
-            ...
-        ]
-        ```
-        6. Membuat model dengan nama Item di dalam kelas models.py. models.py berisi:
-        ```
-        class Item(models.Model):
-        photo_url = models.CharField(max_length=512, default="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg")
-        name = models.CharField(max_length=255)
-        amount =  models.IntegerField(default=0)
-        price =  models.IntegerField(default=0)
-        description = models.TextField()
-        rating =  models.IntegerField(default=0)
-        sold =  models.IntegerField(default=0)
-        ```
-        Setiap field model memliki tipe datanya dan default valuenya masing-masing.
-        7. Melakukan migrasi model dengan menjalankan ```python manage.py makemigrations``` lalu ```python manage.py migrate```
-        8.
-
 # Implementasi Setiap Checklist yang Ada
 
 ## Membuat sebuah proyek Django baru.
@@ -152,8 +108,15 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
 1. Simpan kode yang telah dibuat lalu diunggah ke github repository
 2. Hubungkan Adaptable dengan github repository
 
-#Bagan yang berisi request client ke web aplikasi berbasis Django
+# Bagan yang berisi request client ke web aplikasi berbasis Django
+![Alt text](Django.jpg)
 
+Berikut adalah alur responnya:
+1. User request kepada `urls.py`
+2. `urls.py` akan memanggil function di `views.py` sesuai dengan _pattern_ urlnya
+3. `views.py` mengakses `models.py` untuk membaca atau menulis data ke _database_ melalui `models.py`
+4. `views.py` juga mengakses berkas-berkas yang ada di `templates` untuk memanggil file-file yang sesuai (termasuk berkas-berkas `html`)
+5. `views.py` mengembalikan response dengan data yang diambil dari `models.py` dan fiile-file yang ada di templates (termasuk `html`)
 
 # Mengapa menggunakan _virtual environment_?
 _Virtual environment_ digunakan untuk menjaga _dependencies_ yang dibutuhkan dari setiap proyek yang ada. Sebagai contoh jika kita mengerjakan banyak proyek django, maka kita bisa membedakan dan menjaga _dependencies_ dari setiap proyek yang ada. Bisa saja setiap proyek memiliki versi dan _dependencies_ yang berbeda-beda.
@@ -166,6 +129,7 @@ Ya, tetap bisa. Namun tidak disarankan melakukan seperti itu. Hal tersebut akan 
 ## MVC (Model, View, Controller)
 ![Alt text](image.png)
 (https://www.dicoding.com/blog/apa-itu-mvc-pahami-konsepnya/)
+
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
 a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
 b. View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna dalam bentuk GUI. Sebagai contoh berkaitan dengan html dan css
@@ -174,6 +138,7 @@ c. Controller: Sebgai jembatan antara model dan view
 ## MVT (Model, View, Template)
 ![Alt text](image-2.png)
 (https://www.geeksforgeeks.org/django-project-mvt-structure/)
+
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
 a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
 b. View: Sebagai jembatan antara model dan template.
@@ -182,6 +147,7 @@ c. Template: Mengatur segala hal yang berkaitan dengan apa yang akan ditamplkan 
 ## MVVM (Model, View, View Model)
 ![Alt text](image-1.png)
 (https://www.dicoding.com/blog/tips-design-pattern-mvvm/)
+
 a. Model: Mengatur segala hal yang berkaitan dengan data
 b. View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
 c. View model: Berinteraksi dengan model lalu datanya diterukan ke view.
