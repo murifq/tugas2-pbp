@@ -131,23 +131,23 @@ Ya, tetap bisa. Namun tidak disarankan melakukan seperti itu. Hal tersebut akan 
 (https://www.dicoding.com/blog/apa-itu-mvc-pahami-konsepnya/)
 
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
-a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
-b. View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna dalam bentuk GUI. Sebagai contoh berkaitan dengan html dan css
-c. Controller: Sebgai jembatan antara model dan view
+* Model: Mengatur segala hal yang berkaitan dengan data di dalam database
+* View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna dalam bentuk GUI. Sebagai contoh berkaitan dengan html dan css
+* Controller: Sebgai jembatan antara model dan view
 
 ## MVT (Model, View, Template)
 ![Alt text](image-2.png)
 (https://www.geeksforgeeks.org/django-project-mvt-structure/)
 
 MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahkan kode menjadi tiga bagian, yakni:
-a. Model: Mengatur segala hal yang berkaitan dengan data di dalam database
-b. View: Sebagai jembatan antara model dan template.
-c. Template: Mengatur segala hal yang berkaitan dengan apa yang akan ditamplkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
+* Model: Mengatur segala hal yang berkaitan dengan data di dalam database
+* b. View: Sebagai jembatan antara model dan template.
+* Template: Mengatur segala hal yang berkaitan dengan apa yang akan ditamplkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
 
 ## MVVM (Model, View, View Model)
 ![Alt text](image-1.png)
 (https://www.dicoding.com/blog/tips-design-pattern-mvvm/)
 
-a. Model: Mengatur segala hal yang berkaitan dengan data
-b. View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
-c. View model: Berinteraksi dengan model lalu datanya diterukan ke view.
+* Model: Mengatur segala hal yang berkaitan dengan data
+* View: Mengatur segala hal yang berkaitan dengan apa yang akan ditampilkan kepada pengguna. Sebagai contoh berkaitan dengan html dan css
+*c.* View model: Berinteraksi dengan model lalu datanya diterukan ke view.
