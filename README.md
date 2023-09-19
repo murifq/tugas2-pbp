@@ -180,11 +180,6 @@ MVC adalah salah satu arsitektur dalam membuat aplikasi. Arsitektur ini memisahk
     1. HTML adalah singkatan dari JHyperText Markup Language
     2. Menggunakan konsep _tag_ dan _attribute_ dalam format datanya.
 
-
-1. XML dan HTML menggunakan konsep tree (pohon), sedangkan JSON menggunakan konsep _key-value_
-2. XML dan HTML memiliki tag dalam menampilkan informasi, sedangakn JSON tidak memiliki tag
-3. XML adalah _markup_ _language_ sedangkan JSON adalah _data format_
-
 ## Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
 1. File JSON berukuran kecil sehingga dalam proses pertukaran data berjalan dengan cepat.
 2. Format penulisan JSON lebih mudah dibaca oleh manusia, sehingga lebih mudah digunakan.
