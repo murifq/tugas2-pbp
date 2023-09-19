@@ -18,7 +18,6 @@ def show_main (request):
 
 def create_product(request):
     form = ItemForm(request.POST or None)
-    print(form)
     if form.is_valid() and request.method == "POST":
         form.save()
         return HttpResponseRedirect(reverse('main:show_main'))
