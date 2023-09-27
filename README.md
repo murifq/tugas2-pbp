@@ -1008,6 +1008,7 @@ response.delete_cookie('last_login')
 </div>
 ```
 Kode di atas ditambahkan agar apabila _button_ tertentu di klik, akan membuka _url_ tertentu dan akan meneruskan _id item_
+
 2. Tambahkan fungsi berikut pada `views.py`
 ```
 def increase_amount(request, id):
@@ -1029,6 +1030,7 @@ def remove_item(request, id):
     return redirect('main:show_main')
 ```
 Fungsi di atas berguna untuk mendapatkan _item_ sesudai _id_ dan mengubah _amount_ dari _item_ sesuai dengan ketentuan
+
 3. Tambahkann _path_ baru di `urls.py`
 ```
 ...
