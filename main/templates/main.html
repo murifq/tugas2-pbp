@@ -10,9 +10,7 @@
             margin: 0px;
         }
         header{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            color: white;
             background-color: green;
             height: 125px;
             position: fixed;
@@ -20,13 +18,26 @@
             z-index: 9998;
             min-width: 100%;
         }
-        .title{
-            text-align: left;
+        h1{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: center;
-            padding-left: 30px;
         }
+        nav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .user-info{
+            display: flex;
+            flex-direction: row;
+        }
+        .user-info i,p{
+            padding-left:10px;
+            /* color: white; */
+        }
+
         .create-product-button{
             padding-right: 30px;
             display: flex;
@@ -76,20 +87,31 @@
             flex-wrap: wrap;
             padding-top: 10px;
         }
-
+        .change-amount-btn{
+            display: flex;
+            flex-direction: row;
+        }
     </style>
 </head>
 <body>
     
     <header>
+
         <h1>tokopakedi</h1>
-        <a class="create-product-button" href="{% url 'main:create_product' %}">
-            <i class="fa fa-plus-circle" style="font-size:24px;color: white;"></i>
-        </a>
+        <nav>
+            <a class="create-product-button" href="{% url 'main:create_product' %}">
+                <i class="fa fa-plus-circle" style="font-size:24px;color: white;"></i>
+            </a>
+            <a href="" class="user-info">
+                <i class="fa fa-user" style="font-size:24px;color: white;"></i>
+                <p>{{name}}</p>
+            </a>
+            <a href="{% url 'main:logout' %}">
+                <i class="fa fa-sign-out" style="font-size:24px;color: white;"></i>
+            </a>
+        </nav>
     </header>
     <div class="total-items">
-        <p>Nama: {{nama}}</p>
-        <p>Kelas: {{kelas}}</p>
         Terdapat {{items|length}} barang
     </div>
     <div class="items-container">
@@ -103,13 +125,29 @@
                     <div class="review-container">
                         <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
                         <p>{{x.rating}} | </p>
-                        <p>{{x.sold}} terjual</p>
+                        <p>{{x.amount}} stok</p>
+                    </div>
+                    <div class="change-amount-btn">
+                        <form method="POST" action="{% url 'main:increase_amount' x.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm">+1</button>
+                        </form>
+                        <form method="POST" action="{% url 'main:decrease_amount' x.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">-1</button>
+                        </form>
+                        <form method="POST" action="{% url 'main:remove_item' x.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                        </form>
                     </div>
                 </div>
             </a>
         </ul>
         {% endfor %}
     </div>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+
 </body>
 
 </html>
