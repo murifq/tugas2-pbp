@@ -1040,3 +1040,379 @@ path('remove_item/<int:id>/', views.remove_item, name='remove_item'),
 ...
 ```
 _Path_ tersebut ditambahkan agar apabila terdapat pola _url_ yang diakses, maka fungsi di `views.py` dapat terpanggil
+
+# Tugas 5
+
+##  Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+Berikut adalah beberapa manfaat dari element selector:
+1. Mudah dan efisien untuk digunakan. Hal tersebut karena dapat langsung memilih seluruh tag yang dipilih di html file yang digunakan
+2. Kebanyakan browser mendukung elmeent selector
+
+Elemenet selector digunakan ketika ingin menerpapkan gaya CSS yang sama kepada semua tag html yang ada. Namun penggunaannya perlu berhati-hati karena dapat memengaruhi element-elmeent child di dalamnya
+
+## Jelaskan HTML5 Tag yang kamu ketahui.
+Ada banyak sekali tag pada HTML 5. Berikut adalah beberapa diantaranya:
+1. `<a>` : Berguna untuk memberikan _hyperlink_
+2. `<p>` : Untuk menulis dengan gaya seperti paragraf
+3. `<h1>` sampai `<h6>` : Mendifinisikan judul dan subjudul
+4. `<div>` : Membagi beberapa bagian html
+5. `<form>` : Membuat formulir HTML yang dapat digunakan untuk mendapat _input_ pengguna
+6. `<style>`: Ini digunakan untuk menambahkan aturan CSS langsung ke dalam dokumen HTML
+7. `<nav>`: Digunakan untuk mendefinisikan menu navigasi dalam sebuah dokumen.
+8. `<nav>`: Digunakan untuk mendefinisikan menu navigasi dalam sebuah dokumen.
+9. `<header>`: Mendefinisikan bagian atas (header) dari sebuah halaman web, yang sering berisi judul, logo, dan elemen-elemen lainnya.
+10. `<button>`: Untuk membuat tombol dalam formulir atau halaman web.
+dan masih banyak html tag lainnya
+
+## Jelaskan perbedaan antara margin dan padding.
+* Margin:
+    1. Area di luar elmeen HTML
+    2. Mengatur jarak dengan elemen-elmeent HTML lainnya
+    3. Tidak memengauhi elemen di dalamnya
+* Padding:
+    1. Area di antara konten dan batas elemennya
+    2. Digunakan untuk mengatur jarak antara batas konten dan batas elmennya
+    3. Memengaruhi elemen di dalmanya
+
+## Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+* Tailwind
+    1. Lebih memberikan ruang untuk membangun desain sendiri
+    2. Relatif lebih kecil ukuran filenya
+* Bootstrap
+    1. Terdapat banyak desain yang sudah jadi, sehingga bisa langsung diterapkan ke proyek yang kita miliki
+    2. Relatif lebih besar ukura filenya
+
+* Kapan sebaiknya memilih Tailwind atau Bootstrap
+    1. Pilih Bootstrap jika ingin pengembangan lebih cepat. Hal tersebut karena Bootstrap menyediakan banyak desain yang sudah siap pakai
+    2. Pilih Tailwind jika ingin memiliki tingkat kustomisasi yang tinggi
+    3. Pilih Tailwind jika ingin memikirkan optimisasi _website_. Hal tersebut karena ukuran file Tailwind relatif lebih kecil
+    4. Jika bekerja dengan tim, maka bisa didiskusikan ingin menggunakan yang mana. Sesuaikan dengan kemampuan dan kebiasaan tim
+
+## Implementasi Checklist
+
+### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+
+* Kustomisasi halaman `login`
+    1. Tambahkan `div` dengan _class_ `login`. Berguna sebagai menjadi _flex container_ bagi elment di dalamnya
+
+    ```
+        .login{
+            padding-top: 250px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    ```
+    2. Tambahkan `div` dengan _class_ `login-container`. Berguna untuk menjadi _flex item_ yang akan di tengahkan dari _flex container_ nya. Div ini juga dapat digunakan sebagai _flex container_ yang akan menyimpan _flex items_ yang berisi _input_ yang akan diberikan pengguna
+    ```
+            .login-container{
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            box-shadow:0 0 2px 2px grey;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    ```
+    3. Tambahkan `login-field` yang berisi _input_ yang dapat diisi oleh _user_
+    4. Hias item-item yang ada di  `login-field` dengan kode berikut
+    ```
+        .login-field{
+            margin-bottom: 20px;
+        }
+        input{
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+
+        }
+        .btn-login_btn{
+            background-color: green;
+             color: white;
+        }
+        .btn-login_btn:hover{
+            cursor: pointer;
+            color: whitesmoke;
+            background-color: darkgreen;
+        }
+    ```
+     5. Hias header agar _background color_ nya berwarna hijau, dan tetap selalu berada di paling atas
+    ```
+        body{
+            margin: 0px;
+        }
+        .tokopakedi-h1{
+            color: white;
+            margin: 5px;
+        }
+        header{
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            background-color: green;
+            height: 125px;
+            position: fixed;
+            top: 0;
+            min-width: 100%;
+            /* z-index: 9999; */
+        }
+    ```
+    Jangan lupa tambahkan `padding -top` pada elemen di bawah `header` agar tidak terhalangi
+    ```
+        .login{
+            padding-top: 250px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    ```
+
+
+* Kustomisasi halaman `register`
+    1. Tambahkan `div` dengan _class_ `regitser`. Berguna sebagai menjadi _flex container_ bagi elment di dalamnya
+
+    ```
+        .login{
+            padding-top: 250px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    ```
+    2. Tambahkan `div` dengan _class_ `register-container`. Berguna untuk menjadi _flex item_ yang akan di tengahkan dari _flex container_ nya. Div ini juga dapat digunakan sebagai _flex container_ yang akan menyimpan _flex items_ yang berisi _input_ yang akan diberikan pengguna
+    ```
+        .register-container{
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            box-shadow:0 0 2px 2px grey;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    ```
+    3. Tambahkan `form`, dan masukkan `form.as_div`, sehingga django akan menambahkan `form` nya sebagai div secara otomatis. Tambahkan `register-field` yang berisi _input_ yang dapat diisi oleh _user_
+    4. Hias item-item yang ada di  `register-field` dengan kode berikut
+    ```
+        .register-field{
+            margin-bottom: 20px;
+        }
+        input{
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+
+        }
+        .btn-register{
+            background-color: green;
+             color: white;
+        }
+        .btn-login_btn:hover{
+            cursor: pointer;
+            color: whitesmoke;
+            background-color: darkgreen;
+        }
+    ```
+    5. Masukkan `messages` yang secara _default_ ada pada django
+    6. Tambahkan `header` pada HTML, lalu tulis nama aplikasi (`tokopakedi`)
+    7. Hias header agar _background color_ nya berwarna hijau, dan tetap selalu berada di paling atas
+    ```
+        body{
+            margin: 0px;
+        }
+
+        .tokopakedi-h1{
+            color: white;
+            margin: 5px;
+        }
+        header{
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            background-color: green;
+            height: 125px;
+            position: fixed;
+            top: 0;
+            min-width: 100%;
+        }
+    ```
+    Jangan lupa tambahkan `padding -top` pada elemen di bawah `header` agar tidak terhalangi
+    ```
+        .register{
+            padding-top: 250px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    ```
+
+
+* Kustomisasi halaman tambah inventori
+    1. Tambahkan `header` dan jaga `header` tetap berada di atas
+    ```
+        body{
+            margin: 0px;
+        }
+        h1, h2{
+            color: white;
+            text-align: left;
+            margin: 5px;
+        }
+        header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: green;
+            height: 125px;
+            position: fixed;
+            top: 0;
+            min-width: 100%;
+            /* z-index: 9999; */
+        }
+    ```
+    Jangan lupa elemen di bawah `header` harus diberi`padding-top` agar tidak terhalang
+    ```
+        main{
+            display: flex;
+            flex-direction: row;
+            padding-top: 150px;
+        }
+    ```
+    2. Tambahkan form, dan masukkan satu per satu kepada `div` yang ada
+    3. Hias `form` dan elemen di dalam nya dengan kode berikut
+    ```
+        .form-field{
+            display: flex;
+            flex-direction: column;
+        }
+        .form-field div{
+            padding-left: 10px;
+        }
+        .form-field p{
+            min-width: 120px;
+            /* background-color: ; */
+        }
+        input{
+            border-radius: 5px;
+            border-color: grey;
+            border-style: solid;
+        }
+    ```
+
+### Kustomisasi halaman daftar inventori
+1. Tambahkan `header` dan jaga `header` tetap berada di atas. Tambahkan _navigation  button_ yang diletakkan secara horizontal di dalam `header`
+```
+        body{
+            margin: 0px;
+        }
+        header{
+            color: white;
+            background-color: green;
+            height: 125px;
+            position: fixed;
+            top: 0;
+            z-index: 9998;
+            min-width: 100%;
+        }
+        h1{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        nav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .user-info{
+            display: flex;
+            flex-direction: row;
+        }
+        .user-info i,p{
+            padding-left:10px;
+            /* color: white; */
+        }
+
+        .create-product-button{
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1, h2{
+            color: white;
+            text-align: left;
+            margin: 5px;
+        }
+```
+Jadikan `nav` tag menjadi flexbox yang berorientasi horizontal (column), sehingga elemen-elemen di dalamnya terleteak secara horizontal
+2. Tambahkan `items-container` yang akan menampung seluruh `cards` item yang ada, dan jadikan sebagi _flexbox_ dengan  orientasi _row_ dan konten diaatur secara start.
+```
+    .items-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+        padding-top: 10px;
+    }
+```
+3. Tambahkan `div` `product-box` yang akan menjadi `card` dan menampung setiap item yang ada. Lalu tambahkan gambar pada `img` dan tambahkan `chanege-amount-btn` yang akan menampung tombol untuk +1, -, dan menghapus item
+4. Jadikan `product-box` menjadi flex dengan arah column, dan letakkan _items child_ nya menyebar. Hias `card` dengan css berikut
+```
+    .product-box{
+        display: flex;
+        border-radius: 10px;
+        flex-direction: column;
+        border-style: double;
+        justify-content: space-between;
+        width:150px ;
+        height: 300px;
+    }
+    .product-box p{
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .price-field{
+        font-weight: bold;
+    }
+
+    a{
+        color: inherit;
+        text-decoration: none;
+    }
+    img{
+        width: 100%;
+        /* object-fit:scale-down; */
+        object-fit: cover;
+        height: 100px;
+    }
+
+    .review-container{
+        display: flex;
+        flex-direction: row;
+    }
+    .total-items{
+        padding-top: 125px;
+    }
+    .items-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+        padding-top: 10px;
+    }
+    .change-amount-btn{
+        display: flex;
+        flex-direction: row;
+    }
+```
+
+### Bonus
+1.  Tambahkan `{% if forloop.last %} class='last'{% endif %}` pada tag `p` yang ada di `card` pada `main.html`
+2. Ubah warna teks semua `p` dengan class `last` yang  ada dengan warna hijau
+```
+    .last{
+        color: green;;
+    }
+```

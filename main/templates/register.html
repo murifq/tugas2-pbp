@@ -22,13 +22,13 @@
             min-width: 100%;
         }
 
-        .login{
+        .register{
             padding-top: 250px;
             display: flex;
             flex-direction: row;
             justify-content: center;
         }
-        .login-container{
+        .register-container{
             width: 300px;
             display: flex;
             flex-direction: column;
@@ -37,7 +37,7 @@
             
             padding: 20px;
         }
-        .login-field{
+        .register-field{
             margin-bottom: 20px;
         }
         input{
@@ -46,11 +46,11 @@
             border-radius: 10px;
 
         }
-        .btn-login_btn{
+        .btn-register_btn{
             background-color: green;
              color: white;
         }
-        .btn-login_btn:hover{
+        .btn-register_btn:hover{
             cursor: pointer;
             color: whitesmoke;
             background-color: darkgreen;
@@ -64,8 +64,8 @@
     <h1 class="tokopakedi-h1">tokopakedi</h1>
 </header>
 
-<div class = "login">
-    <div class="login-container">
+<div class = "register">
+    <div class="register-container">
 
         <h1>Register</h1>  
     
@@ -74,17 +74,17 @@
                 <table>  
                     {{ form.as_div }}  
                     <tr>  
-                        <div class="login-field">
+                        <div class="register-field">
                             <div class="username-field"></div>
                         </div>
-                        <div class="login-field">
+                        <div class="register-field">
                             <div class="ppassword-field"></div>
                         </div>
-                        <div class="login-field">
+                        <div class="register-field">
                             <div class="ppassword-confirmation-field"></div>
                         </div>
-                        <input class="btn-login_btn" type="submit" name="submit" value="Daftar"/>
-                        <p>Already registered? <a href="{% url 'main:login' %}">Login</a> </p>
+                        <input class="btn-register_btn" type="submit" name="submit" value="Daftar"/>
+                        <p>Already registered? <a href="{% url 'main:login' %}">login</a> </p>
                     </tr>  
                 </table>  
             </form>

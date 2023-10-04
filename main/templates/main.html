@@ -55,7 +55,9 @@
             border-radius: 10px;
             flex-direction: column;
             border-style: double;
-            max-width:120px ;
+            justify-content: space-between;
+            width:150px ;
+            height: 300px;
         }
         .product-box p{
             padding-left: 2px;
@@ -70,7 +72,10 @@
             text-decoration: none;
         }
         img{
-            max-width: 500px;
+            width: 100%;
+            /* object-fit:scale-down; */
+            object-fit: cover;
+            height: 100px;
         }
 
         .review-container{
@@ -90,6 +95,9 @@
         .change-amount-btn{
             display: flex;
             flex-direction: row;
+        }
+        .last{
+            color: green;;
         }
     </style>
 </head>
@@ -120,25 +128,32 @@
             <a href="">
                 <div class="product-box">
                     <img src='{{x.photo_url}}' alt="">
-                    <p>{{x.name}}</p>
-                    <p class="price-field">Rp.{{x.price}}</p>
-                    <div class="review-container">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
-                        <p>{{x.rating}} | </p>
-                        <p>{{x.amount}} stok</p>
+                    <div class="product-information">
+                        <p {% if forloop.last %} class='last'{% endif %} >{{x.name}}</p>
+                        <p {% if forloop.last %} class='last'{% endif %} class="price-field">Rp.{{x.price}}</p>
+                        <div class="review-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
+                            <p{% if forloop.last %} class='last'{% endif %}>{{x.rating}} | </p>
+                            <p{% if forloop.last %} class='last'{% endif %}>{{x.amount}} stok</p>
+                        </div>
                     </div>
                     <div class="change-amount-btn">
                         <form method="POST" action="{% url 'main:increase_amount' x.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm">+1</button>
+                            <!-- <button type="submit" class="btn btn-success btn-sm">+1</button> -->
+                            <input class="btn-login_btn" type="submit" value="+1">
+
                         </form>
                         <form method="POST" action="{% url 'main:decrease_amount' x.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">-1</button>
+                            <!-- <button type="submit" class="btn btn-danger btn-sm">-1</button> -->
+                            <input class="btn-login_btn" type="submit" value="-1">
+
                         </form>
                         <form method="POST" action="{% url 'main:remove_item' x.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                            <!-- <button type="submit" class="btn btn-danger btn-sm">Del</button> -->
+                            <input class="btn-login_btn" type="submit" value="Del">
                         </form>
                     </div>
                 </div>
