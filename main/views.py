@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from .models import Item
@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
 
 @login_required(login_url='/login')
 def show_main (request):
@@ -105,3 +107,28 @@ def remove_item(request, id):
     item = get_object_or_404(Item, pk=id)
     item.delete()
     return redirect('main:show_main')
+
+
+
+def get_product_json(request):
+    product_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        user = request.user
+        print("Line 119")
+        photo_url = request.POST.get("photo_url")
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        rating = request.POST.get("rating")
+        sold = request.POST.get("sold")
+
+        new_product = Item(photo_url = photo_url, name=name, amount = amount, price=price, description=description, rating = rating,sold = sold, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()

@@ -1416,3 +1416,6 @@ Jadikan `nav` tag menjadi flexbox yang berorientasi horizontal (column), sehingg
         color: green;;
     }
 ```
+
+# Tugas 6
+##

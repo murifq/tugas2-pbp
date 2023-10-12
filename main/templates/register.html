@@ -1,103 +1,54 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block meta %}
     <title>Register</title>
-    <style>
-        body{
-            margin: 0px;
-        }
+    <link rel="stylesheet" href="{% static 'main/css/register.css' %}">
 
-        .tokopakedi-h1{
-            color: white;
-            margin: 5px;
-        }
-        header{
-            display: flex;
-            flex-direction: row;
-            justify-content:center;
-            background-color: green;
-            height: 125px;
-            position: fixed;
-            top: 0;
-            min-width: 100%;
-        }
 
-        .register{
-            padding-top: 250px;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
-        .register-container{
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            box-shadow:0 0 2px 2px grey;
-            border-radius: 10px;
-            
-            padding: 20px;
-        }
-        .register-field{
-            margin-bottom: 20px;
-        }
-        input{
-            width: 100%;
-            height: 30px;
-            border-radius: 10px;
-
-        }
-        .btn-register_btn{
-            background-color: green;
-             color: white;
-        }
-        .btn-register_btn:hover{
-            cursor: pointer;
-            color: whitesmoke;
-            background-color: darkgreen;
-        }
-        
-    </style>
 {% endblock meta %}
 
-{% block content %}  
-<header>
-    <h1 class="tokopakedi-h1">tokopakedi</h1>
-</header>
+{% block content %}
 
-<div class = "register">
-    <div class="register-container">
+    <header>
+        <h1 class="tokopakedi-h1">tokopakedi</h1>
+    </header>
 
-        <h1>Register</h1>  
-    
-            <form method="POST" >  
-                {% csrf_token %}  
-                <table>  
-                    {{ form.as_div }}  
-                    <tr>  
-                        <div class="register-field">
-                            <div class="username-field"></div>
-                        </div>
-                        <div class="register-field">
-                            <div class="ppassword-field"></div>
-                        </div>
-                        <div class="register-field">
-                            <div class="ppassword-confirmation-field"></div>
-                        </div>
-                        <input class="btn-register_btn" type="submit" name="submit" value="Daftar"/>
-                        <p>Already registered? <a href="{% url 'main:login' %}">login</a> </p>
-                    </tr>  
-                </table>  
-            </form>
-    
-        {% if messages %}  
-            <ul>   
-                {% for message in messages %}  
-                    <li>{{ message }}</li>  
-                    {% endfor %}  
-            </ul>   
-        {% endif %}
-    </div>
+    <div class = "register">
+        <div class="register-container">
 
-</div>  
+            <h1>Register</h1>  
+        
+                <form method="POST" >  
+                    {% csrf_token %}  
+                    <table>  
+                        {{ form.as_div }}  
+                        <tr>  
+                            <div class="register-field">
+                                <div class="username-field"></div>
+                            </div>
+                            <div class="register-field">
+                                <div class="ppassword-field"></div>
+                            </div>
+                            <div class="register-field">
+                                <div class="ppassword-confirmation-field"></div>
+                            </div>
+                            <input class="btn-register_btn" type="submit" name="submit" value="Daftar"/>
+                            <p>Already registered? <a href="{% url 'main:login' %}">login</a> </p>
+                        </tr>  
+                    </table>  
+                </form>
+        
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                        {% endfor %}  
+                </ul>   
+            {% endif %}
+        </div>
+
+    </div>  
 
 {% endblock content %}

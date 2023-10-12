@@ -1,54 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        body{
-            margin: 0px;
-        }
-        h1, h2{
-            color: white;
-            text-align: left;
-            margin: 5px;
-        }
-        header{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            background-color: green;
-            height: 125px;
-            position: fixed;
-            top: 0;
-            min-width: 100%;
-            /* z-index: 9999; */
-        }
-        main{
-            display: flex;
-            flex-direction: row;
-            padding-top: 150px;
-        }
+    <link rel="stylesheet" href="{% static 'main/css/create_product.css' %}">
 
-        .form-field{
-            display: flex;
-            flex-direction: column;
-        }
-        .form-field div{
-            padding-left: 10px;
-        }
-        .form-field p{
-            min-width: 120px;
-            /* background-color: ; */
-        }
-        input{
-            border-radius: 5px;
-            border-color: grey;
-            border-style: solid;
-        }
-    </style>
-</head>
-<body>
+{% endblock meta %}
+
+
+{% block content %}
     <header>
         <div class="title">
             <h1>tokopakedi</h1>
@@ -100,5 +63,5 @@
             </table>
         </form>
     </main>
-</body>
-</html>
+
+{% endblock content %}

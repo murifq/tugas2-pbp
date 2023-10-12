@@ -1,112 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
-    <style>
-        body{
-            margin: 0px;
-        }
-        header{
-            color: white;
-            background-color: green;
-            height: 125px;
-            position: fixed;
-            top: 0;
-            z-index: 9998;
-            min-width: 100%;
-        }
-        h1{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
-        nav{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-        }
 
-        .user-info{
-            display: flex;
-            flex-direction: row;
-        }
-        .user-info i,p{
-            padding-left:10px;
-            /* color: white; */
-        }
-
-        .create-product-button{
-            padding-right: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h1, h2{
-            color: white;
-            text-align: left;
-            margin: 5px;
-        }
-        .product-box{
-            display: flex;
-            border-radius: 10px;
-            flex-direction: column;
-            border-style: double;
-            justify-content: space-between;
-            width:150px ;
-            height: 300px;
-        }
-        .product-box p{
-            padding-left: 2px;
-            padding-right: 2px;
-        }
-        .price-field{
-            font-weight: bold;
-        }
-
-        a{
-            color: inherit;
-            text-decoration: none;
-        }
-        img{
-            width: 100%;
-            /* object-fit:scale-down; */
-            object-fit: cover;
-            height: 100px;
-        }
-
-        .review-container{
-            display: flex;
-            flex-direction: row;
-        }
-        .total-items{
-            padding-top: 125px;
-        }
-        .items-container{
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            flex-wrap: wrap;
-            padding-top: 10px;
-        }
-        .change-amount-btn{
-            display: flex;
-            flex-direction: row;
-        }
-        .last{
-            color: green;;
-        }
-    </style>
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+{% endblock meta %}
+
+{% block content %}
     <header>
 
         <h1>tokopakedi</h1>
         <nav>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: white; color: green;">Add Product by AJAX</button>
             <a class="create-product-button" href="{% url 'main:create_product' %}">
                 <i class="fa fa-plus-circle" style="font-size:24px;color: white;"></i>
             </a>
@@ -117,52 +33,71 @@
             <a href="{% url 'main:logout' %}">
                 <i class="fa fa-sign-out" style="font-size:24px;color: white;"></i>
             </a>
+
+
+
         </nav>
     </header>
     <div class="total-items">
         Terdapat {{items|length}} barang
     </div>
     <div class="items-container">
-        {%for x in items%}
-        <ul>
-            <a href="">
-                <div class="product-box">
-                    <img src='{{x.photo_url}}' alt="">
-                    <div class="product-information">
-                        <p {% if forloop.last %} class='last'{% endif %} >{{x.name}}</p>
-                        <p {% if forloop.last %} class='last'{% endif %} class="price-field">Rp.{{x.price}}</p>
-                        <div class="review-container">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
-                            <p{% if forloop.last %} class='last'{% endif %}>{{x.rating}} | </p>
-                            <p{% if forloop.last %} class='last'{% endif %}>{{x.amount}} stok</p>
-                        </div>
-                    </div>
-                    <div class="change-amount-btn">
-                        <form method="POST" action="{% url 'main:increase_amount' x.id %}">
-                            {% csrf_token %}
-                            <!-- <button type="submit" class="btn btn-success btn-sm">+1</button> -->
-                            <input class="btn-login_btn" type="submit" value="+1">
+        <ul id="product_table">
 
-                        </form>
-                        <form method="POST" action="{% url 'main:decrease_amount' x.id %}">
-                            {% csrf_token %}
-                            <!-- <button type="submit" class="btn btn-danger btn-sm">-1</button> -->
-                            <input class="btn-login_btn" type="submit" value="-1">
-
-                        </form>
-                        <form method="POST" action="{% url 'main:remove_item' x.id %}">
-                            {% csrf_token %}
-                            <!-- <button type="submit" class="btn btn-danger btn-sm">Del</button> -->
-                            <input class="btn-login_btn" type="submit" value="Del">
-                        </form>
-                    </div>
-                </div>
-            </a>
         </ul>
-        {% endfor %}
     </div>
     <h5>Sesi terakhir login: {{ last_login }}</h5>
 
-</body>
 
-</html>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="photo_url" class="col-form-label">Url foto:</label>
+                            <input type="text" class="form-control" id="photo_url" name="photo_url"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Nama:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Jumlah:</label> 
+                            <input type="number" class="form-control" id="amount" name="amount" min="1"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Harga:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Deskripsi:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="col-form-label">Rating:</label>
+                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="5"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sold" class="col-form-label">Jumlah terjual:</label>
+                            <input type="number" class="form-control" id="sold" name="sold" min="0"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'main/js/main.js'%}">
+       
+    </script>
+
+{% endblock content %}

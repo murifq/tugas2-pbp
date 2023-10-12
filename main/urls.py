@@ -19,4 +19,8 @@ urlpatterns = [
     path('decrease_amount/<int:id>/', views.decrease_amount, name='decrease_amount'),
     path('remove_item/<int:id>/', views.remove_item, name='remove_item'),
 
+    path('get-product/', views.get_product_json, name='get_product_json'),
+    path('create-product-ajax/', views.add_product_ajax, name='add_product_ajax'),
+
+
 ]
