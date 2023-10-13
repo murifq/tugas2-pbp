@@ -1418,4 +1418,280 @@ Jadikan `nav` tag menjadi flexbox yang berorientasi horizontal (column), sehingg
 ```
 
 # Tugas 6
-##
+
+## Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+* asynchronous programming
+    1. Dalam pemrograman asinkron, tugas atau operasi tidak perlu menunggu operasi sebelumnya selesai sebelum dimulai. Operasi-operasi ini berjalan secara bersamaan atau dalam latar belakang.
+    2. Asynchronous programming umumnya digunakan ketika operasi memerlukan waktu yang lama, seperti mengambil data dari jaringan atau disk, agar program tidak terblokir selama operasi tersebut berlangsung.
+    3. Pemrograman asinkron memanfaatkan konsep seperti "callback functions," "promises," "async/await" untuk mengkoordinasi tugas asinkron.
+
+* synchronous programming
+    1. Dalam pemrograman sinkron, tugas atau operasi dieksekusi secara berurutan, satu per satu, dalam urutan yang telah ditentukan.
+    2. Program akan menunggu operasi saat ini selesai sebelum melanjutkan ke operasi berikutnya. Ini dapat mengakibatkan program terhenti atau terblokir saat operasi membutuhkan waktu yang lama untuk menyelesaikan.
+    3. Pemrograman sinkron lebih mudah dipahami dan di-debug karena alur eksekusi program bersifat linier dan dapat diprediksi.
+
+## Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Makudnya adalah interaksi dari _user_ akan membuat _event_. _Event_ ini akan ditangkap oleh program (_event-handler_), sehingga dapat dimanfaatkan untuk men-_trigger_ program lainnya dapat berjalan. 
+
+Dalam tugas ini, salah satu contohnya adalah terdapat pada `main.html` untuk menambah item.
+
+```
+...
+document.getElementById("button_add").onclick = addProduct
+...
+```
+Apabila _button_ dengan id `button_add` di klik, maka prorgam akan menjalankan fungsi `addProduct. Fungsi tersebut berguna untuk menambahkan item baru.
+
+## Jelaskan penerapan asynchronous programming pada AJAX.
+Penerapa _asynchronous programming_ di AJAX memungkinkan Javascript untuk mengirim _request_ tetapi tidak menunggu hingga program berjalan. Program bisa menjalankan bagian program lainnya terlebih dahulu.
+
+Salah satu contohnya terdapat pada tugas ini
+```
+...
+async function getProducts() {
+    return fetch("/get-product").then((res) => res.json())
+}
+
+async function refreshProducts() {
+    const products = await getProducts()
+    let htmlString = ``
+...
+```
+Sehingga program tidak berhenti untuk menunggu itu saja, tetapi masih bisa berinteraksi dengan _user_.
+
+## Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
+* Fetch API
+    1. Modern dan Native: Fetch API adalah API bawaan peramban web modern, yang berarti itu merupakan standar web yang didukung oleh semua peramban terbaru.
+    2. Modern dan Native: Fetch API adalah API bawaan peramban web modern, yang berarti itu merupakan standar web yang didukung oleh semua peramban terbaru.
+    3. Fleksibel: Fetch API memungkinkan Anda untuk melakukan berbagai jenis permintaan HTTP (GET, POST, PUT, DELETE, dsb.) dengan konfigurasi yang mudah disesuaikan.
+
+* jQuery
+    1. Fleksibel: Fetch API memungkinkan Anda untuk melakukan berbagai jenis permintaan HTTP (GET, POST, PUT, DELETE, dsb.) dengan konfigurasi yang mudah disesuaikan.
+    2. Kompatibilitas Lintas _Browser_: jQuery memiliki abstraksi yang berfungsi baik di sebagian besar _browser_, yang dapat mengatasi perbedaan implementasi _browser_.
+
+Apabila ingin membangun _website_ yang modern, maka bisa jugankan Fetch API. Namun, jika ingin kompabilitas _browser_ yang luas, maka bisa gunakan jQuery.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+###  AJAX GET
+1. Tambahkan _path_ baru pada `urls.py`
+```
+    path('get-product/', views.get_product_json, name='get_product_json'),
+```
+2. Tambahkan fungsi baru pada `views.py`
+```
+def get_product_json(request):
+    product_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+```
+3. Hapus _dhild element_ dari `ul`
+```
+    <div class="items-container">
+        <ul id="product_table">
+
+        </ul>
+    </div>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+```
+4. Hubungkan `main.html` dengan `main.js`
+```
+...
+    <script src="{% static 'main/js/main.js'%}">
+       
+    </script>
+
+{% endblock content %}
+```
+5. Tambahkan fungsi baru pada `views.py` untuk mengambil semua item
+```
+async function getProducts() {
+    return fetch("/get-product").then((res) => res.json())
+}
+```
+6. Tambahkan fungsi baru sehingga _refresh_ dapat terjadi secara _asynchronus_
+```
+...
+async function refreshProducts() {
+    const products = await getProducts()
+    let htmlString = ``
+    products.forEach((item) => {
+        htmlString += 
+        `
+        
+        <a href="" class="product-box-a">
+            <div class="product-box">
+                <img src='${item.fields.photo_url}' alt="">
+
+                <div class="product-information" >
+                    <p>${item.fields.name}</p>
+                    <p>Rp.${item.fields.price}</p>
+                    <div class="review-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" style="max-width: 12px; max-height: 12px;margin-top: 18px;">
+                        <p>${item.fields.rating} | </p>
+                        <p>${item.fields.amount} stok</p>
+                    </div>
+                </div>
+            </div>
+        </a>\n
+        
+        `
+    })
+    
+    document.getElementById("product_table").innerHTML = htmlString
+}
+
+refreshProducts()
+...
+```
+
+###  AJAX POST
+1. Tambahkan bootstrap pada `main.html`
+```
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+```
+2. Pisahkan css menjadi _external_ css dengan kode berikut
+```
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+```
+3. Tambahkan `button` berikut pada `nav` di `header`
+```
+...
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: white; color: green;">Add Product by AJAX</button>
+...
+```
+4. Tambahakn _pop-up_ untuk menambahkan item dengan menggunakan bootstrap
+```
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="photo_url" class="col-form-label">Url foto:</label>
+                            <input type="text" class="form-control" id="photo_url" name="photo_url"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Nama:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Jumlah:</label> 
+                            <input type="number" class="form-control" id="amount" name="amount" min="1"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Harga:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Deskripsi:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="col-form-label">Rating:</label>
+                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="5"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sold" class="col-form-label">Jumlah terjual:</label>
+                            <input type="number" class="form-control" id="sold" name="sold" min="0"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+```
+5. Tambahkan fungsi baru pada `main.js`
+```
+function addProduct() {
+    fetch("create-product-ajax/", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    }).then(refreshProducts)
+
+    document.getElementById("form").reset()
+    return false
+}
+document.getElementById("button_add").onclick = addProduct
+```
+Fungsi tersebut akan menambahkan item baru.
+6. Tambahkan _path_ baru pada `urls.py`
+```
+    path('create-product-ajax/', views.add_product_ajax, name='add_product_ajax'),
+```
+
+###  Melakukan perintah collectstatic.
+1. Satukan semua folder css dan js dalam satu folder `static` di dalam main
+2. Masuk ke dalam `env` lalu jalankan 
+```
+python manage.py collecstatic
+```
+
+### Bonus
+1. Tambahkan `div` baru pada `main.js` `get-product`
+```
+...
+                <div class="change-amount-btn">
+                    <a href="/decrease_amount/${item.pk}">
+                        <i class="fa fa-minus" style="font-size:24px;color: black;"></i>
+                    </a>
+                    <a href="/increase_amount/${item.pk}">
+                        <i class="fa fa-plus" style="font-size:24px;color: black;"></i>
+                    </a>
+                    <a href="/remove_item/${item.pk}">
+                        <i class="fa fa-trash" style="font-size:24px;color: black;"></i>
+                    </a>
+                </div>
+...
+```
+2. Ketiga `a` tersebut akan memanggil 3 _path_ url yang udh ada di `urls.py`
+```
+    path('increase_amount/<int:id>/', views.increase_amount, name='increase_amount'),
+    
+    path('decrease_amount/<int:id>/', views.decrease_amount, name='decrease_amount'),
+   
+    path('remove_item/<int:id>/', views.remove_item, name='remove_item'),
+```
+3. Ketiga _path_ tersebut akan memanggil fungsi di `views.py`
+```
+...
+def increase_amount(request, id):
+    item = get_object_or_404(Item, pk=id)
+    item.amount += 1
+    item.save()
+    return redirect('main:show_main')
+
+def decrease_amount(request, id):
+    item = get_object_or_404(Item, pk=id)
+    if(item.amount > 0):
+        item.amount -= 1
+    item.save()
+    return redirect('main:show_main')
+
+def remove_item(request, id):
+    item = get_object_or_404(Item, pk=id)
+    item.delete()
+    return redirect('main:show_main')
+...
+```
