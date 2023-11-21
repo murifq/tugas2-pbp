@@ -1,11 +1,8 @@
-from django.http import JsonResponse
 from django.shortcuts import render
-from django.contrib.auth import logout as auth_logout
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login as auth_login
-
-# Create your views here.
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout as auth_logout
 
 @csrf_exempt
 def login(request):
@@ -33,7 +30,7 @@ def login(request):
             "status": False,
             "message": "Login gagal, periksa kembali email atau kata sandi."
         }, status=401)
-
+    
 @csrf_exempt
 def logout(request):
     username = request.user.username
